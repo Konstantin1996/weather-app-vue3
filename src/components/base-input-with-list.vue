@@ -5,16 +5,14 @@
                 placeholder="Please, enter city country name" 
                 v-bind="$attrs"
                 :value="inputValue"
-                @input="value => $emit('input', value)"
+                @input="(value: string)  => $emit('input', value)"
             />
         </template>
         <template v-if="items.length" #item>
-            <base-list-item
-                slot:item
+            <drop-down-list-item-block 
                 v-for="item in items"
                 :key="item.id"
                 :item="item"
-                @click="onClickEmitSelectedItem"
             />
         </template>
     </base-input-with-list-layout>
@@ -24,10 +22,10 @@
     import { PropType } from 'vue';
     import BaseInputWithListLayout from '@/layouts/base-input-with-list-layout.vue';
     import BaseInput from '@/components/base-input.vue';
-    import BaseListItem from '@/components/base-list-item.vue';
+    import DropDownListItemBlock from '@/blocks/drop-down-list-item-block.vue';
     import { Item } from '@/interfaces/Item';
 
-    const props = defineProps({
+    defineProps({
         inputValue: {
             type: String,
             default: '',
@@ -41,12 +39,7 @@
         }
     });
 
-    const emit = defineEmits<{
+    defineEmits<{
         (event: 'input', value: string): void
-        (event: 'click', value: Item): void
     }>();
-
-    function onClickEmitSelectedItem(selectedItem) {
-        emit('click', selectedItem)
-    }
 </script>

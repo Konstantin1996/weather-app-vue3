@@ -1,8 +1,7 @@
 <template>
-    <!-- Need to pass this login into block -->
     <li 
         :class="$style.item"
-        @click="onClickRedirectUserToLdp"
+        @click="$emit('click', item)"
     >
         <strong :class="$style.city">City</strong> 
         <span>{{ item.name }}</span>
@@ -12,11 +11,10 @@
 </template>
 
 <script setup lang="ts">
-    import { PropType, inject } from 'vue';
+    import { PropType } from 'vue';
     import { Item } from '@/interfaces/Item';
-    import { useRouter } from "vue-router";
 
-    const props = defineProps({
+    defineProps({
         item: {
             type: Object as PropType<Item>,
             default: null,
@@ -24,13 +22,7 @@
         }
     });
 
-    const store = inject("store");
-    const router = useRouter();
-
-    function onClickRedirectUserToLdp() {
-        router.push(`/location/${props.item.id}`);
-        store.setItem(props.item);
-    }
+    defineEmits<{(e: 'click', value: Item): void}>();
 </script>
 
 <style module lang="less">

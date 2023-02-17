@@ -3,7 +3,7 @@
 To run application do next steps:
 
 1. npm install
-2. create .env file VITE_SOME_KEY property. You can find example in .env.example
+2. create .env file VITE_WEATHER_API_KEY property. You can find example in .env.example
 3. npm run dev
 
 To run tests run:

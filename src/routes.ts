@@ -1,4 +1,4 @@
-import { Path } from "@/interfaces/Path.ts";
+import { Path } from "@/interfaces/Path";
 
 export const routes: Array<Path> = [
     {
