@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherItem should display name, region, country, temperature, condition 1`] = `
+<div
+  data-v-app=""
+>
+  
+  <p>
+    Name: Custom name
+  </p>
+  <p>
+    Region: custom region
+  </p>
+  <p>
+    Country: country
+  </p>
+  <p>
+    Temperature: 45.3 °C
+  </p>
+  <p>
+    Condition: Sunny
+  </p>
+  <img
+    alt="weather-img"
+    src="https://t4.ftcdn.net/jpg/03/63/38/53/360_F_363385318_FGumiZOnWi4vRuaFJ2Df0KpidbzLp2fu.jpg"
+  />
+  
+</div>
+`;
