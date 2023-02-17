@@ -27,6 +27,6 @@
     function onClickRedirectUserToLdp(item: Item) {
         router.push(`/location/${item.id}`);
         // need to move this logic into page
-        store.setItem(props.item);
+        store?.setItem(props.item);
     }
 </script>

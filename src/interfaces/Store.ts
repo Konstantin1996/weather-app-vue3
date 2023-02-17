@@ -3,5 +3,5 @@ export interface Store {
     state?: {
         selectedItem: Item | null;
     };
-    setItem: Object;
+    setItem: Function;
 }
