@@ -3,10 +3,10 @@ import { Item } from "@/interfaces/Item";
 import { Store } from "@/interfaces/Store";
 
 const state = reactive({
-    selectedItem: null,
+    selectedItem: null as Item | null,
 });
 
-const setItem = (item: Item) => {
+const setItem = (item: Item | null) => {
     state.selectedItem = item;
 };
 

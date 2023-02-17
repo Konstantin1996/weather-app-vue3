@@ -10,7 +10,7 @@
     const props = defineProps({
         objectToSave: {
             type: Object as PropType<FavoriteItem>,
-            required: true
+            required: false
         }
     });
 

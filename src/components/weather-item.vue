@@ -8,29 +8,31 @@
 </template>
 
 <script setup lang="ts">
+    import { defineProps, PropType } from 'vue';
+
     defineProps({
         name: {
-            type: String,
+            type: Object as PropType<string | undefined>,
             required: true,
         },
 
         region: {
-            type: String,
+            type: Object as PropType<string | undefined>,
             required: true,
         },
 
         country: {
-            type: String,
+            type: Object as PropType<string | undefined>,
             required: true,
         },
 
         tempInCelsius: {
-            type: Number,
+            type: Object as PropType<number | undefined>,
             required: true
         },
 
         weatherCondition: {
-            type: String,
+            type: Object as PropType<string | undefined>,
             default: '',
             required: true
         },

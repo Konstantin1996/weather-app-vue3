@@ -1,4 +1,7 @@
+import { Item } from "@/interfaces/Item";
 export interface Store {
-    state: Object;
+    state?: {
+        selectedItem: Item | null;
+    };
     setItem: Object;
 }

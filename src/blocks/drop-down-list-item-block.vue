@@ -8,7 +8,8 @@
 
 <script setup lang="ts">
     import { PropType, inject } from 'vue';
-    import { Item, Store } from '@/interfaces/Item';
+    import { Item } from '@/interfaces/Item';
+    import { Store } from '@/interfaces/Store';
     import { useRouter } from "vue-router";
     import BaseListItem from '@/components/base-list-item.vue';
 
@@ -20,11 +21,12 @@
         }
     });
 
-    const store: Store = inject("store");
+    const store: Store | undefined = inject("store");
     const router = useRouter();
 
     function onClickRedirectUserToLdp(item: Item) {
         router.push(`/location/${item.id}`);
+        // need to move this logic into page
         store.setItem(props.item);
     }
 </script>
