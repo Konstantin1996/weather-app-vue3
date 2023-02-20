@@ -12,7 +12,6 @@ const setItem = (item: Item | null) => {
 
 const store: Store = {
     state: readonly(state),
-    setItem,
 };
 
 export default store;

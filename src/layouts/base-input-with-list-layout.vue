@@ -20,6 +20,7 @@
     }
 
     .listWrapper {
+        background: white;
         box-sizing: border-box;
         position: absolute;
         width: inherit;

@@ -2,14 +2,15 @@
     <base-input-with-list-layout>
         <template #input>
             <base-input
-                placeholder="Please, enter city country name" 
+                placeholder="Please, enter city or country name" 
                 v-bind="$attrs"
                 :value="inputValue"
                 @input="(value: string)  => $emit('input', value)"
             />
         </template>
         <template v-if="items.length" #item>
-            <drop-down-list-item-block 
+            <component 
+                :is="currentActionBlock"
                 v-for="item in items"
                 :key="item.id"
                 :item="item"
@@ -19,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-    import { PropType } from 'vue';
+    import { PropType, computed } from 'vue';
     import BaseInputWithListLayout from '@/layouts/base-input-with-list-layout.vue';
     import BaseInput from '@/components/base-input.vue';
     import DropDownListItemBlock from '@/blocks/drop-down-list-item-block.vue';
@@ -37,6 +38,10 @@
             default: () => [],
             required: true
         }
+    });
+
+    const currentActionBlock = computed(() => {
+        return DropDownListItemBlock;
     });
 
     defineEmits<{

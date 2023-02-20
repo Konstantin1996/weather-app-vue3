@@ -24,9 +24,22 @@
     const store: Store | undefined = inject("store");
     const router = useRouter();
 
-    function onClickRedirectUserToLdp(item: Item) {
-        router.push(`/location/${item.id}`);
-        // need to move this logic into page
-        store?.setItem(props.item);
+    async function onClickRedirectUserToLdp(item: Item) {
+        let recentWeather: Array<Item> = JSON.parse(sessionStorage.getItem('recentWeather') as string) || [];
+        const query = {
+            name: item.name,
+            region: item.region,
+            country: item.country,
+            lon: item.lon,
+            lat: item.lat
+        };
+
+        if (!recentWeather.some((recentItem: Item) => recentItem.id === item.id)) {
+            recentWeather.push(item);
+        }
+
+        sessionStorage.setItem('recentWeather', JSON.stringify(recentWeather));
+
+        await router.push({ path: `/location/${item.id}`, query });
     }
 </script>

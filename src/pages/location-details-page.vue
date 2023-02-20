@@ -19,7 +19,8 @@
 </template>
 
 <script setup lang="ts">
-    import { onMounted, computed, reactive, inject, ComputedRef } from "vue";
+    import { onMounted, computed, reactive, inject,  } from "vue";
+    import { useRoute, LocationQueryValue } from 'vue-router';
     import axios from 'axios';
     import { FORECAST_WEATHER_URL } from '@/helpers/constants';
     import LocationDetailsLayout from '@/layouts/location-details-layout.vue';
@@ -34,43 +35,44 @@
             icon?: string,
             text?: string
         },
-    }
+    };
+
+    const router = useRoute();
 
     const currentForecast: Forecast = reactive({});
     // let notReactiveObjectToSave: FavoriteItem;
 
     onMounted(async () => {
-        console.log('name.value', name.value);
-        const params = { params: { key: import.meta.env.VITE_WEATHER_API_KEY , q: name.value } };
+        console.log('router.params.id', router.params.id);
+        const params = { params: { key: import.meta.env.VITE_WEATHER_API_KEY , q: `${router.query.lat},${router.query.lon}` } };
         const { data: { current } } = await axios.get(FORECAST_WEATHER_URL, params);
-        console.log('current', current);
         Object.assign(currentForecast, current);
         // notReactiveObjectToSave = Object.assign({}, currentForecast, current);
     });
 
     const store: Store | undefined | null = inject("store");
 
-    const name = computed<string | undefined>(() => {
-        return store?.state?.selectedItem?.name;
+    const name = computed<LocationQueryValue | LocationQueryValue[]>(() => {
+        return router.query.name;
     });
 
-    const region = computed<string | undefined>(() => {
-        return store?.state?.selectedItem?.region;
+    const region = computed<LocationQueryValue | LocationQueryValue[]>(() => {
+        return router.query.region;
     })
 
-    const country = computed<string | undefined>(() => {
-        return store?.state?.selectedItem?.country;
+    const country = computed<LocationQueryValue | LocationQueryValue[]>(() => {
+        return router.query.country;
     })
     
     const tempInCelsius = computed<number | undefined>(() => {
         return currentForecast.temp_c;
     });
 
-    const weatherIcon = computed(() => {
+    const weatherIcon = computed<string | undefined>(() => {
         return currentForecast.condition?.icon;
     })
 
-    const weatherCondition = computed(() => {
+    const weatherCondition = computed<string | undefined>(() => {
         return currentForecast.condition?.text;
     })
 
